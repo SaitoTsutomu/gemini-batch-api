@@ -31,6 +31,7 @@ run = "uv run --env-file .env"
 test = "uv run pytest --disable-warnings"
 
 [tool.pyrefly]
+project-excludes = ["src/tests/**"]
 project-includes = ["src", "sample"]
 
 [tool.ruff]
