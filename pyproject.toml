@@ -28,6 +28,7 @@ src = ["src", "sample"]
 
 [tool.ruff.lint]
 ignore = [
+  "COM812", # https://docs.astral.sh/ruff/rules/missing-trailing-comma/
   "CPY", # https://docs.astral.sh/ruff/rules/#flake8-copyright-cpy
   "D10", # https://docs.astral.sh/ruff/rules/#pydocstyle-d
   "D203", # https://docs.astral.sh/ruff/rules/incorrect-blank-line-before-class/

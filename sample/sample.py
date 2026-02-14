@@ -1,8 +1,10 @@
 # ruff: noqa: T201
+import os
 from datetime import datetime
 from pathlib import Path
 
 import fire
+from google import genai
 from pydantic import BaseModel, Field
 
 from gemini_batch_api import Request, create_batch, get_inlined_responses
@@ -16,6 +18,7 @@ class FileInfo(BaseModel):
 
 def main(*, upload: bool = False, structured: bool = False) -> None:
     """画像からテキスト抽出"""
+    client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY", ""))
     request = Request(
         query="文字抽出",
         file=Path(__file__).parent / "sample.png",
@@ -23,8 +26,10 @@ def main(*, upload: bool = False, structured: bool = False) -> None:
         schema=FileInfo if structured else None,
     )
     print(f"開始 {datetime.now():%H:%M:%S}")
-    batch_name = create_batch("gemini-flash-lite-latest", [request])
-    inlined_responses = get_inlined_responses(batch_name)
+    batch_name = create_batch(client, "gemini-flash-lite-latest", [request])
+    if not batch_name:
+        return
+    inlined_responses = get_inlined_responses(client, batch_name)
     if inlined_responses:
         for response in inlined_responses:
             if response.response:
