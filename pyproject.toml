@@ -15,7 +15,7 @@ license = {text = "Apache-2.0"}
 name = "gemini-batch-api"
 readme = "README.md"
 requires-python = ">=3.12"
-version = "0.1.1"
+version = "0.1.2"
 
 [dependency-groups]
 dev = [
@@ -23,6 +23,9 @@ dev = [
   "jupyter>=1.1.1",
   "pytest>=9.0.2",
 ]
+
+[project.urls]
+homepage = "https://github.com/SaitoTsutomu/gemini-batch-api"
 
 [tool.taskipy.tasks]
 jupyter = "uv run --env-file .env jupyter lab -y nbs"
