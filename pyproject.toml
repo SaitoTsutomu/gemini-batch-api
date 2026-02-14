@@ -1,9 +1,17 @@
 [project]
 authors = [{name = "Saito Tsutomu", email = "tsutomu7@hotmail.co.jp"}]
+classifiers = [
+  "Development Status :: 1 - Planning",
+  "License :: OSI Approved :: Apache Software License",
+  "Programming Language :: Python",
+  "Topic :: Software Development",
+  "Topic :: Scientific/Engineering",
+]
 dependencies = [
   "google-genai>=1.63.0",
 ]
 description = "Gemini Batch API utility"
+license = {text = "Apache-2.0"}
 name = "gemini-batch-api"
 readme = "README.md"
 requires-python = ">=3.12"
@@ -13,12 +21,14 @@ version = "0.1.0"
 dev = [
   "fire>=0.7.1",
   "jupyter>=1.1.1",
+  "pytest>=9.0.2",
 ]
 
 [tool.taskipy.tasks]
 jupyter = "uv run --env-file .env jupyter lab -y nbs"
 lint = "pyrefly check && ruff check "
 run = "uv run --env-file .env"
+test = "uv run pytest --disable-warnings"
 
 [tool.pyrefly]
 project-includes = ["src", "sample"]
