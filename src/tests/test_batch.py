@@ -12,8 +12,6 @@ from gemini_batch_api.batch import (
     get_inlined_responses,
 )
 
-RequestFactory = SimpleNamespace
-
 
 class TestGetInlineRequest:
     """get_inline_requestのテスト"""
@@ -70,7 +68,8 @@ class TestGetInlineRequest:
             get_inline_request(client=client, request=request)
 
         # Assert
-        client.files.upload.assert_called_once_with(file=file_path)
+        config = types.UploadFileConfig(mime_type="application/octet-stream")
+        client.files.upload.assert_called_once_with(file=file_path, config=config)
 
     @classmethod
     def test_with_schema(cls, client: MagicMock) -> None:
@@ -152,8 +151,8 @@ class TestGetInlinedResponses:
         """成功のテスト"""
         # Arrange
         responses = [object(), object()]
-        pending_job = RequestFactory(state=types.JobState.JOB_STATE_RUNNING, dest=None)
-        succeeded_job = RequestFactory(
+        pending_job = SimpleNamespace(state=types.JobState.JOB_STATE_RUNNING, dest=None)
+        succeeded_job = SimpleNamespace(
             state=types.JobState.JOB_STATE_SUCCEEDED,
             dest=SimpleNamespace(inlined_responses=responses),
         )
@@ -173,7 +172,7 @@ class TestGetInlinedResponses:
     def test_returns_none_when_job_ends_failed(cls, sleep_mock: MagicMock, client: MagicMock) -> None:
         """失敗のテスト"""
         # Arrange
-        failed_job = RequestFactory(state=types.JobState.JOB_STATE_FAILED, dest=None)
+        failed_job = SimpleNamespace(state=types.JobState.JOB_STATE_FAILED, dest=None)
         client.batches.get.return_value = failed_job
 
         # Act

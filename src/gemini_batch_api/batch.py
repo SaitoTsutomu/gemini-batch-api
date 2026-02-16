@@ -1,3 +1,4 @@
+import io
 import mimetypes
 import time
 from dataclasses import dataclass
@@ -14,6 +15,7 @@ class Request:
     query: str  # クエリ
     file: Path | None = None  # ファイル
     upload: bool = False  # アップロードするかどうか
+    upload_file_name: str | None = None  # アップロードするファイル名
     schema: type | None = None  # 構造化出力
 
 
@@ -28,7 +30,13 @@ def get_inline_request(client: genai.Client, request: Request) -> types.InlinedR
     if request.file:
         mime_type = mimetypes.guess_type(request.file.name)[0] or "application/octet-stream"
         if request.upload:
-            uploaded_file = client.files.upload(file=request.file)
+            config = types.UploadFileConfig(mime_type=mime_type)
+            if request.upload_file_name:
+                with io.BytesIO(request.file.read_bytes()) as buf:
+                    buf.name = request.upload_file_name
+                    uploaded_file = client.files.upload(file=buf, config=config)
+            else:
+                uploaded_file = client.files.upload(file=request.file, config=config)
             if not uploaded_file.uri:
                 msg = "Failed to upload file"
                 raise ValueError(msg)

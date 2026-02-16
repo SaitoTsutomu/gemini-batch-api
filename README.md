@@ -75,3 +75,5 @@ requests = [
 ### ファイルアップロード
 
 ファイルをアップロードする場合は、`Request.upload`にTrueを指定してください。
+
+アップロードするファイル名がASCIIでない場合は、`Request.upload_file_name`にASCIIのファイル名を指定してください。

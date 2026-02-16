@@ -21,8 +21,9 @@ def main(*, upload: bool = False, structured: bool = False) -> None:
     client = genai.Client(api_key=os.environ.get("GEMINI_API_KEY", ""))
     request = Request(
         query="文字抽出",
-        file=Path(__file__).parent / "sample.png",
+        file=Path(__file__).parent / "サンプル.png",
         upload=upload,
+        upload_file_name="sample.png",
         schema=FileInfo if structured else None,
     )
     print(f"開始 {datetime.now():%H:%M:%S}")
