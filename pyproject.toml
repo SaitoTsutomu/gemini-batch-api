@@ -30,8 +30,16 @@ homepage = "https://github.com/SaitoTsutomu/gemini-batch-api"
 [tool.taskipy.tasks]
 jupyter = "uv run --env-file .env jupyter lab -y nbs"
 lint = "pyrefly check && ruff check "
+pip-audit = "uv run -w pip-audit pip-audit"
 run = "uv run --env-file .env"
 test = "uv run pytest --disable-warnings"
+
+[tool.uv]
+exclude-newer = "3 days"
+
+[[tool.uv.index]]
+default = true
+url = "https://pypi.flatt.tech/simple/"
 
 [tool.pyrefly]
 project-excludes = ["src/tests/**"]
