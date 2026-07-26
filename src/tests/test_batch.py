@@ -48,7 +48,7 @@ class TestGetInlineRequest:
         result = get_inline_request(client=client, request=request)
 
         # Assert
-        assert len(result.contents.parts) == 2  # noqa: PLR2004
+        assert len(result.contents.parts) == 2  # ruff:ignore[magic-value-comparison]
         assert result.contents.parts[0].text == "q"
         assert result.contents.parts[1].inline_data.data == b"abc"
         assert result.contents.parts[1].inline_data.mime_type == "text/plain"

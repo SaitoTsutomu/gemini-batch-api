@@ -49,20 +49,20 @@ src = ["src", "sample"]
 
 [tool.ruff.lint]
 ignore = [
-  "COM812", # https://docs.astral.sh/ruff/rules/missing-trailing-comma/
+  "missing-trailing-comma", # https://docs.astral.sh/ruff/rules/missing-trailing-comma/
   "CPY", # https://docs.astral.sh/ruff/rules/#flake8-copyright-cpy
   "D10", # https://docs.astral.sh/ruff/rules/#pydocstyle-d
-  "D203", # https://docs.astral.sh/ruff/rules/incorrect-blank-line-before-class/
-  "D213", # https://docs.astral.sh/ruff/rules/multi-line-summary-second-line/
-  "D400", # https://docs.astral.sh/ruff/rules/missing-trailing-period/
-  "D401", # https://docs.astral.sh/ruff/rules/non-imperative-mood/
-  "D415", # https://docs.astral.sh/ruff/rules/missing-terminal-punctuation/
-  "DOC201", # https://docs.astral.sh/ruff/rules/docstring-missing-returns/
-  "DOC402", # https://docs.astral.sh/ruff/rules/docstring-missing-yields/
-  "DOC501", # https://docs.astral.sh/ruff/rules/docstring-missing-exception/
+  "incorrect-blank-line-before-class", # https://docs.astral.sh/ruff/rules/incorrect-blank-line-before-class/
+  "multi-line-summary-second-line", # https://docs.astral.sh/ruff/rules/multi-line-summary-second-line/
+  "missing-trailing-period", # https://docs.astral.sh/ruff/rules/missing-trailing-period/
+  "non-imperative-mood", # https://docs.astral.sh/ruff/rules/non-imperative-mood/
+  "missing-terminal-punctuation", # https://docs.astral.sh/ruff/rules/missing-terminal-punctuation/
+  "docstring-missing-returns", # https://docs.astral.sh/ruff/rules/docstring-missing-returns/
+  "docstring-missing-yields", # https://docs.astral.sh/ruff/rules/docstring-missing-yields/
+  "docstring-missing-exception", # https://docs.astral.sh/ruff/rules/docstring-missing-exception/
   "DTZ", # https://docs.astral.sh/ruff/rules/#flake8-datetimez-dtz
-  "E501", # https://docs.astral.sh/ruff/rules/line-too-long/
-  "E731", # https://docs.astral.sh/ruff/rules/lambda-assignment/
+  "line-too-long", # https://docs.astral.sh/ruff/rules/line-too-long/
+  "lambda-assignment", # https://docs.astral.sh/ruff/rules/lambda-assignment/
 ]
 preview = true
 select = ["ALL"]
@@ -71,7 +71,7 @@ select = ["ALL"]
 max-nested-blocks = 6
 
 [tool.ruff.lint.extend-per-file-ignores]
-"*/tests/*.py" = ["S101"]
+"*/tests/*.py" = ["assert"]
 
 [tool.ruff.lint.mccabe]
 max-complexity = 10

@@ -2,9 +2,9 @@ from importlib.metadata import metadata
 
 from .batch import Request, create_batch, get_inlined_responses
 
-_package_metadata = metadata(str(__package__))  # noqa: RUF067
+_package_metadata = metadata(str(__package__))  # ruff:ignore[non-empty-init-module]
 __version__ = _package_metadata["Version"]
-__summary__ = _package_metadata["Summary"]  # noqa: RUF067
+__summary__ = _package_metadata["Summary"]
 __author__ = _package_metadata.get("Author-email", "")
 
 __all__ = [

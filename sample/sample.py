@@ -1,4 +1,4 @@
-# ruff: noqa: T201
+# ruff:file-ignore[print]
 import os
 from datetime import datetime
 from pathlib import Path
